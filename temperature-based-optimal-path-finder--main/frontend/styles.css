@@ -1,0 +1,1284 @@
+/* ==========================================================================
+   THERMAL ROUTE / COOLROUTE - SOFTLY DESIGN SYSTEM & DASHBOARD STYLES
+   Light Theme: Warm Stone (#FDFCF8), Emerald Accent (#10b981), Coral (#FFB7B2)
+   Dark Theme:  Deep Slate (#0f172a) with tinted panels and glowing accent
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Reenie+Beanie&display=swap');
+
+/* ── Light theme (default) ─────────────────────────────────────── */
+:root {
+    --bg-color: #FDFCF8;
+    --panel-bg: #FFFFFF;
+    --border-color: #E7E5E4;
+    --border-subtle: rgba(231, 229, 228, 0.8);
+    --text-main: #292524;
+    --text-muted: #78716C;
+    --text-light: #A8A29E;
+
+    --accent: #10b981;
+    --accent-hover: #059669;
+    --accent-dark: #047857;
+    --header-bg: rgba(255, 255, 255, 0.94);
+
+    --coral: #FFB7B2;
+    --coral-dark: #FF8E88;
+    --sage: #E8EFE8;
+    --lavender: #EFEDF4;
+    --peach: #FFE4E1;
+
+    --cyan: #0284c7;
+    --amber: #d97706;
+    --red: #dc2626;
+
+    --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    --shadow-soft-lg: 0 12px 32px -4px rgba(0, 0, 0, 0.08);
+    --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+    --input-bg: #FFFFFF;
+    --input-border: #D6D3D1;
+    --select-bg: #FFFFFF;
+    --hud-bg: rgba(255, 255, 255, 0.97);
+    --route-card-bg: #FFFFFF;
+    --mandi-bg: #f0fdf4;
+    --badge-bg: #F5F5F4;
+    --drawer-bg: #FAFAF9;
+    --map-overlay-bg: rgba(255,255,255,0.92);
+}
+
+/* ── Dark theme ────────────────────────────────────────────────── */
+body[data-theme="dark"] {
+    --bg-color: #0f172a;
+    --panel-bg: #1e293b;
+    --border-color: #334155;
+    --border-subtle: rgba(51, 65, 85, 0.8);
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --text-light: #64748b;
+
+    --accent: #34d399;
+    --accent-hover: #10b981;
+    --accent-dark: #059669;
+    --header-bg: rgba(15, 23, 42, 0.96);
+
+    --coral: #fca5a5;
+    --coral-dark: #f87171;
+    --sage: #1e3a2f;
+    --lavender: #1e1b4b;
+    --peach: #3b1f1f;
+
+    --cyan: #38bdf8;
+    --amber: #fbbf24;
+    --red: #f87171;
+
+    --shadow-soft: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+    --shadow-soft-lg: 0 12px 32px -4px rgba(0, 0, 0, 0.5);
+    --shadow-xs: 0 1px 3px rgba(0, 0, 0, 0.3);
+
+    --input-bg: #0f172a;
+    --input-border: #475569;
+    --select-bg: #1e293b;
+    --hud-bg: rgba(15, 23, 42, 0.97);
+    --route-card-bg: #1e293b;
+    --mandi-bg: #0d2618;
+    --badge-bg: #1e293b;
+    --drawer-bg: #162032;
+    --map-overlay-bg: rgba(15,23,42,0.92);
+}
+
+/* ── Smooth theme transition on all elements ───────────────────── */
+*, *::before, *::after {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.2s ease, box-shadow 0.3s ease;
+}
+
+/* ── Theme Toggle Button ───────────────────────────────────────── */
+.theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 9999px;
+    border: 1px solid var(--border-color);
+    background: var(--badge-bg);
+    color: var(--text-muted);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+.theme-toggle-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--panel-bg);
+}
+.theme-toggle-btn .toggle-icon {
+    font-size: 0.95rem;
+    line-height: 1;
+}
+
+/* ── Voice toggle button ───────────────────────────────────────── */
+.voice-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 9999px;
+    border: 1px solid var(--border-color);
+    background: var(--badge-bg);
+    color: var(--text-muted);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+.voice-toggle-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--panel-bg);
+}
+.voice-toggle-btn.voice-on {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--sage);
+}
+
+/* ── Voice announcement toast ──────────────────────────────────── */
+#voice-toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--panel-bg);
+    color: var(--text-main);
+    border: 1.5px solid var(--accent);
+    border-radius: 12px;
+    padding: 0.65rem 1.25rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    font-family: 'Outfit', sans-serif;
+    box-shadow: var(--shadow-soft-lg);
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    max-width: 320px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+#voice-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.app-header {
+    background-color: var(--header-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow-xs);
+    z-index: 100;
+}
+
+.header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1rem;
+}
+
+.nav-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 1rem;
+    background: #FFFFFF;
+    border: 1px solid var(--border-color);
+    border-radius: 9999px;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+    font-weight: 500;
+    text-decoration: none;
+    box-shadow: var(--shadow-xs);
+    transition: all 0.2s ease;
+}
+
+.nav-back-btn:hover {
+    color: var(--text-main);
+    background: var(--sage);
+    border-color: #10b981;
+    transform: translateX(-2px);
+}
+
+.logo-container {
+    display: flex;
+    align-items: baseline;
+    gap: 0.65rem;
+}
+
+.brand-dot {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 9999px;
+    background-color: var(--coral);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.brand-dot::after {
+    content: '';
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 9999px;
+    background-color: #ffffff;
+}
+
+.app-header h1 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-main);
+    margin: 0;
+}
+
+.app-header .subtitle {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: -0.01em;
+}
+
+/* Info Badges & Methodology Trigger in Header */
+.soft-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.9rem;
+    border-radius: 9999px;
+    background-color: var(--sage);
+    border: 1px solid rgba(231, 229, 228, 0.7);
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-main);
+    box-shadow: var(--shadow-xs);
+}
+
+.badge-dot-green {
+    width: 7px;
+    height: 7px;
+    border-radius: 9999px;
+    background-color: #10B981;
+    animation: pulseDot 2s infinite ease-in-out;
+}
+
+@keyframes pulseDot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+}
+
+.methodology-pill-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.45rem 1rem;
+    border-radius: 9999px;
+    background-color: var(--lavender);
+    border: 1px solid rgba(231, 229, 228, 0.8);
+    color: var(--text-main);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-xs);
+}
+
+.methodology-pill-btn:hover {
+    background-color: #e4e0ec;
+    transform: translateY(-1px);
+}
+
+/* Collapsible Methodology Drawer */
+#methodology-drawer {
+    display: none;
+    background: #FFFFFF;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow-soft-lg);
+    padding: 1.5rem 2rem;
+    max-height: 480px;
+    overflow-y: auto;
+    z-index: 95;
+    animation: drawerSlide 0.3s ease;
+}
+
+#methodology-drawer.open {
+    display: block;
+}
+
+@keyframes drawerSlide {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.font-handwritten {
+    font-family: 'Reenie Beanie', cursive;
+}
+
+/* Layout */
+.app-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--bg-color);
+}
+
+.sidebar, #control-panel {
+    width: 35%;
+    min-width: 370px;
+    max-width: 440px;
+    height: 100%;
+    max-height: calc(100vh - 54px);
+    background-color: #FFFFFF;
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    padding: 1.25rem;
+    padding-bottom: 5rem;
+    overflow-y: auto;
+    box-shadow: 2px 0 16px rgba(0, 0, 0, 0.03);
+    z-index: 10;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(16, 185, 129, 0.3) transparent;
+}
+
+.sidebar::-webkit-scrollbar,
+#control-panel::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track,
+#control-panel::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb,
+#control-panel::-webkit-scrollbar-thumb {
+    background: rgba(16, 185, 129, 0.3);
+    border-radius: 4px;
+}
+
+.map-area {
+    width: 65%;
+    flex: 1;
+    position: relative;
+    background-color: #F8FAF8;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+/* Sidebar Components & Panels */
+.panel-section {
+    margin-bottom: 14px;
+    background: #FFFFFF;
+    border-radius: 1.15rem;
+    padding: 1.15rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-soft);
+}
+
+.panel-section:last-child {
+    margin-bottom: 0;
+}
+
+.panel-section h2 {
+    font-weight: 600;
+    margin-bottom: 0.85rem;
+    color: var(--text-main);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 0.78rem;
+}
+
+.form-group {
+    margin-bottom: 0.85rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.custom-select, .custom-input {
+    width: 100%;
+    background-color: #FAFAF9;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 0.65rem 0.9rem;
+    border-radius: 0.75rem;
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.custom-select:focus, .custom-input:focus {
+    outline: none;
+    border-color: #10b981;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+/* Primary Action Buttons */
+.primary-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #ffffff;
+    border: none;
+    padding: 0.85rem 1.4rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
+    transition: all 0.2s ease;
+    margin-top: 0.85rem;
+}
+
+.primary-btn:hover {
+    background: linear-gradient(135deg, #059669, #047857);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(16, 185, 129, 0.35);
+}
+
+.primary-btn:active {
+    transform: translateY(1px);
+}
+
+/* Summary Statistics */
+.summary-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.stat-box {
+    background-color: #FAFAF9;
+    padding: 0.9rem;
+    border-radius: 0.85rem;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.stat-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: -0.02em;
+}
+
+.telemetry-badge {
+    margin-top: 0.85rem;
+    padding: 0.5rem 0.85rem;
+    border-radius: 9999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.05em;
+    transition: all 0.3s ease;
+}
+
+.telemetry-badge.online {
+    background-color: var(--sage);
+    color: #15803d;
+    border: 1px solid rgba(22, 163, 74, 0.3);
+}
+
+.telemetry-badge.offline {
+    background-color: #fef3c7;
+    color: #b45309;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+/* APMC Live Benchmark Section */
+#mandi-benchmark-section {
+    background: var(--sage);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 1.15rem;
+    padding: 12px 14px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-soft);
+}
+
+#mandi-benchmark-section > div:first-child span:first-child {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.mandi-price-box {
+    background: #FFFFFF;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    border-radius: 0.85rem;
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+#mandi-rate-display {
+    color: #059669;
+    font-weight: 800;
+    font-size: 1.25rem;
+}
+
+#mandi-cargo-value {
+    color: var(--text-main);
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* Route Cards & Ranked Alternatives */
+.route-card {
+    background-color: #FFFFFF;
+    padding: 0.95rem 1.15rem;
+    border-radius: 0.85rem;
+    border: 1px solid var(--border-color);
+    border-left: 4px solid #cbd5e1;
+    margin-bottom: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    box-shadow: var(--shadow-soft);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+}
+
+.route-card-header h3 {
+    font-size: 0.92rem;
+    margin: 0;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.route-card-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.route-card-stats strong {
+    color: var(--text-main);
+}
+
+.ai-banner {
+    background-color: var(--sage);
+    border-left: 4px solid #10b981;
+    padding: 0.9rem 1.15rem;
+    margin-bottom: 1rem;
+    border-radius: 0.85rem;
+    font-size: 0.84rem;
+    line-height: 1.5;
+    color: var(--text-main);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.route-card.recommended {
+    border-color: rgba(16, 185, 129, 0.5);
+    border-left: 4px solid #10b981;
+    background: #F8FAF8;
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.12);
+}
+
+.route-card.dimmed {
+    opacity: 0.65;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.route-card.dimmed:hover {
+    opacity: 0.95;
+    transform: translateY(-1px);
+}
+
+.route-card.active-route-card {
+    border: 2px solid #10b981 !important;
+    border-left: 5px solid #10b981 !important;
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.25) !important;
+    transform: translateY(-2px);
+    opacity: 1 !important;
+    background: #F0FDF4 !important;
+}
+
+.badge-tag {
+    display: inline-block;
+    padding: 0.2rem 0.55rem;
+    border-radius: 9999px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-left: 0.5rem;
+}
+
+/* In-Transit Telemetry HUD - Floating Center Over Map */
+#dispatch-hud.hud-container {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 440px;
+    max-width: calc(100% - 48px);
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: 1.25rem;
+    padding: 14px 18px;
+    box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.12), 0 2px 10px rgba(0, 0, 0, 0.04);
+    z-index: 1000;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-sizing: border-box;
+}
+
+#dispatch-hud h3 {
+    margin: 0 0 6px 0;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#dispatch-hud h3::after {
+    content: "● LIVE TELEMETRY";
+    font-size: 0.65rem;
+    color: #10b981;
+    letter-spacing: 0.6px;
+    animation: pulseDot 1.5s infinite ease-in-out;
+}
+
+#hud-route-name {
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: #0284c7;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#dispatch-hud .hud-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+#dispatch-hud .hud-stat-box {
+    background: #FAFAF9;
+    border: 1px solid var(--border-color);
+    border-radius: 0.85rem;
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#dispatch-hud .hud-label {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    font-weight: 600;
+}
+
+#hud-temp {
+    background: #FFFFFF;
+    border: 1px solid #BAE6FD;
+    color: #0369A1;
+    border-radius: 20px;
+    padding: 3px 10px;
+    display: inline-block;
+    font-size: 1.05rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+#hud-quality {
+    display: inline-block;
+    font-size: 1.15rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+}
+
+#hud-quality[style*="10b981"], #hud-quality[style*="16, 185, 129"] {
+    color: #15803d;
+    background: #E8EFE8;
+    border: 1px solid rgba(22, 163, 74, 0.3);
+}
+
+#hud-quality[style*="f59e0b"], #hud-quality[style*="245, 158, 11"] {
+    color: #b45309;
+    background: #FEF3C7;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+#hud-quality[style*="ef4444"], #hud-quality[style*="239, 68, 68"] {
+    color: #b91c1c;
+    background: #FEE2E2;
+    border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+#hud-progress {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-main);
+    font-variant-numeric: tabular-nums;
+}
+
+#hud-status {
+    margin-top: 10px;
+    padding: 7px 12px;
+    border-radius: 9999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-align: center;
+    background: var(--sage);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #15803d;
+}
+
+/* Leaflet Natural Light Map & Tiles */
+.leaflet-tile {
+    filter: none !important;
+}
+
+.leaflet-container {
+    background: #F8FAF8 !important;
+    font-family: 'Outfit', sans-serif !important;
+}
+
+.thermal-cp-icon {
+    background: rgba(255, 255, 255, 0.95);
+    color: #0369A1;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 8px;
+    border: 1px solid #BAE6FD;
+    white-space: nowrap;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.multi-farm-badge {
+    background-color: var(--lavender);
+    border: 1px solid rgba(147, 51, 234, 0.2);
+    color: #6b21a8;
+    padding: 0.5rem;
+    border-radius: 0.75rem;
+    margin-bottom: 0.85rem;
+    text-align: center;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+/* Custom Crop & Location Trays */
+.custom-toggle-btn {
+    background: var(--sage);
+    border: 1px solid #10b981;
+    color: #047857;
+    border-radius: 9999px;
+    padding: 8px 14px;
+    width: 100%;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-top: 8px;
+    transition: all 0.2s ease;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.custom-toggle-btn:hover {
+    background: #d9e7d9;
+    transform: translateY(-1px);
+}
+
+#custom-crop-tray,
+#multi-farm-waypoints-tray,
+#custom-loc-tray,
+.custom-crop-tray {
+    background: #FAFAF9;
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 14px;
+    margin-top: 8px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.custom-input-group {
+    margin-bottom: 8px;
+}
+
+.custom-input-group label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.custom-crop-tray input,
+.custom-crop-tray select,
+.waypoint-card input,
+.custom-input-group input {
+    width: 100%;
+    background-color: #FFFFFF;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 7px 10px;
+    border-radius: 0.65rem;
+    font-family: inherit;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.custom-crop-tray input:focus,
+.custom-crop-tray select:focus,
+.waypoint-card input:focus,
+.custom-input-group input:focus {
+    outline: none;
+    border-color: #10b981;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+    background-color: #FFFFFF;
+}
+
+.custom-input-row {
+    display: flex;
+    gap: 8px;
+}
+
+.custom-hint {
+    display: block;
+    margin-top: 6px;
+    font-size: 11px;
+    color: #0284c7;
+}
+
+/* Location Presets & Map Picker Buttons */
+.preset-btn {
+    background: #F5F5F4;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    border-radius: 9999px;
+    padding: 5px 11px;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.preset-btn:hover {
+    background: var(--sage);
+    border-color: #10b981;
+    color: #047857;
+}
+
+.preset-btn:active {
+    transform: scale(0.96);
+}
+
+.map-pick-btn {
+    background: var(--sage);
+    border: 1px solid #10b981;
+    color: #047857;
+    border-radius: 0.65rem;
+    padding: 7px 10px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.map-pick-btn:hover {
+    background: #d9e7d9;
+}
+
+.map-pick-btn.active {
+    background: #FEF3C7;
+    border-color: #f59e0b;
+    color: #b45309;
+    animation: pulse-border 1.5s infinite;
+}
+
+@keyframes pulse-border {
+    0% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.5); }
+    70% { box-shadow: 0 0 0 6px rgba(245, 158, 11, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0); }
+}
+
+.custom-farm-pin, .custom-numbered-marker {
+    background: transparent;
+    border: none;
+}
+
+.waypoint-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border-color);
+    border-radius: 0.85rem;
+    padding: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+    transition: border-color 0.2s ease;
+}
+
+.waypoint-card:hover {
+    border-color: #10b981;
+}
+
+/* Responsive viewports */
+@media (max-width: 992px) {
+    .app-container {
+        flex-direction: column;
+        height: auto;
+    }
+    .sidebar, #control-panel {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        max-height: 55vh;
+    }
+    .map-area {
+        width: 100%;
+        height: 45vh;
+    }
+    #dispatch-hud.hud-container {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 16px;
+        width: calc(100vw - 32px);
+        max-width: calc(100vw - 32px);
+    }
+    .header-info-badge {
+        display: none;
+    }
+}
+
+/* ==========================================================================
+   DARK MODE COMPONENT OVERRIDES
+   These rules override the hardcoded light colors used in specific components
+   ========================================================================== */
+
+/* Inputs & selects */
+body[data-theme="dark"] .custom-select,
+body[data-theme="dark"] .custom-input {
+    background-color: var(--input-bg);
+    border-color: var(--input-border);
+    color: var(--text-main);
+}
+body[data-theme="dark"] .custom-select:focus,
+body[data-theme="dark"] .custom-input:focus {
+    background-color: var(--panel-bg);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2);
+}
+body[data-theme="dark"] .custom-crop-tray input,
+body[data-theme="dark"] .custom-crop-tray select,
+body[data-theme="dark"] .waypoint-card input,
+body[data-theme="dark"] .custom-input-group input {
+    background: var(--input-bg);
+    border-color: var(--input-border);
+    color: var(--text-main);
+}
+body[data-theme="dark"] .custom-crop-tray input:focus,
+body[data-theme="dark"] .custom-crop-tray select:focus,
+body[data-theme="dark"] .waypoint-card input:focus,
+body[data-theme="dark"] .custom-input-group input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2);
+}
+body[data-theme="dark"] input::placeholder,
+body[data-theme="dark"] textarea::placeholder {
+    color: var(--text-light);
+}
+
+/* Route cards */
+body[data-theme="dark"] .route-card {
+    background-color: var(--route-card-bg);
+    border-color: var(--border-color);
+}
+body[data-theme="dark"] .route-card.recommended {
+    background: #0d2618;
+    border-color: rgba(52, 211, 153, 0.4);
+    box-shadow: 0 4px 16px rgba(52, 211, 153, 0.12);
+}
+body[data-theme="dark"] .route-card.active-route-card {
+    background: #0d2618 !important;
+    border-color: var(--accent) !important;
+    box-shadow: 0 6px 20px rgba(52, 211, 153, 0.25) !important;
+}
+
+/* AI Banner */
+body[data-theme="dark"] .ai-banner {
+    background-color: var(--sage);
+    border-color: rgba(52, 211, 153, 0.3);
+}
+
+/* Telemetry HUD */
+body[data-theme="dark"] #dispatch-hud.hud-container {
+    background: var(--hud-bg);
+    border-color: var(--border-color);
+    box-shadow: 0 12px 32px -4px rgba(0, 0, 0, 0.5), 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Methodology drawer */
+body[data-theme="dark"] #methodology-drawer {
+    background: var(--drawer-bg);
+    border-bottom-color: var(--border-color);
+}
+
+/* Panel sections */
+body[data-theme="dark"] .panel-section {
+    border-bottom-color: var(--border-color);
+}
+
+/* Soft badges */
+body[data-theme="dark"] .soft-badge,
+body[data-theme="dark"] .header-info-badge {
+    background: var(--badge-bg);
+    border-color: var(--border-color);
+    color: var(--text-muted);
+}
+
+/* Mandi benchmark section */
+body[data-theme="dark"] #mandi-benchmark-section {
+    background: var(--mandi-bg);
+    border-color: rgba(52, 211, 153, 0.25);
+}
+
+/* Waypoint cards */
+body[data-theme="dark"] .waypoint-card {
+    background: var(--panel-bg);
+    border-color: var(--border-color);
+}
+
+/* Telemetry badges */
+body[data-theme="dark"] .telemetry-badge {
+    background: var(--badge-bg);
+    color: var(--text-muted);
+    border-color: var(--border-color);
+}
+body[data-theme="dark"] .telemetry-badge.online {
+    color: var(--accent);
+    background: var(--sage);
+    border-color: rgba(52, 211, 153, 0.3);
+}
+
+/* Leaflet map — invert tiles in dark mode for dark map appearance */
+body[data-theme="dark"] .leaflet-tile-pane {
+    filter: invert(1) hue-rotate(200deg) brightness(0.85) contrast(0.9);
+}
+body[data-theme="dark"] .leaflet-marker-pane,
+body[data-theme="dark"] .leaflet-overlay-pane {
+    filter: none !important;
+}
+body[data-theme="dark"] .leaflet-container {
+    background: #0f172a;
+}
+
+/* Custom crop tray */
+body[data-theme="dark"] #custom-crop-tray,
+body[data-theme="dark"] #custom-loc-tray,
+body[data-theme="dark"] #multi-farm-pickup-tray {
+    background: var(--panel-bg);
+    border-color: var(--border-color);
+}
+
+/* Methodology steps */
+body[data-theme="dark"] .methodology-step {
+    background: var(--panel-bg);
+    border-color: var(--border-color);
+}
+
+/* Ensure all dashboard text is crisp, clear, and visible in dark mode */
+body[data-theme="dark"] h1,
+body[data-theme="dark"] h2,
+body[data-theme="dark"] h3,
+body[data-theme="dark"] h4,
+body[data-theme="dark"] strong,
+body[data-theme="dark"] b {
+    color: var(--text-main) !important;
+}
+
+body[data-theme="dark"] p,
+body[data-theme="dark"] label {
+    color: var(--text-muted) !important;
+}
+
+body[data-theme="dark"] .subtitle {
+    color: var(--text-muted) !important;
+}
+
+body[data-theme="dark"] .mandi-price-box {
+    background: var(--panel-bg) !important;
+    border-color: rgba(52, 211, 153, 0.3) !important;
+}
+
+body[data-theme="dark"] #mandi-rate-display {
+    color: var(--accent) !important;
+}
+
+body[data-theme="dark"] #mandi-cargo-value {
+    color: var(--text-main) !important;
+}
+
+body[data-theme="dark"] .nav-back-btn {
+    background: var(--panel-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-muted) !important;
+}
+
+body[data-theme="dark"] .nav-back-btn:hover {
+    color: var(--accent) !important;
+    border-color: var(--accent) !important;
+}
+
+body[data-theme="dark"] .methodology-pill-btn {
+    background: var(--badge-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-main) !important;
+}
+
+body[data-theme="dark"] .preset-btn {
+    background: var(--panel-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-muted) !important;
+}
+
+body[data-theme="dark"] .preset-btn:hover,
+body[data-theme="dark"] .preset-btn.active {
+    background: var(--sage) !important;
+    border-color: var(--accent) !important;
+    color: var(--accent) !important;
+}
+
+body[data-theme="dark"] .custom-toggle-btn {
+    background: var(--badge-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-main) !important;
+}
+
+body[data-theme="dark"] .map-pick-btn {
+    background: var(--badge-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-main) !important;
+}
+
+body[data-theme="dark"] .waypoint-card [style*="color: #10b981"] {
+    color: #34d399 !important;
+}
+
+body[data-theme="dark"] .waypoint-card [style*="color: #0284c7"] {
+    color: #38bdf8 !important;
+}
+
+body[data-theme="dark"] .waypoint-badge {
+    background: #1e293b !important;
+    border: 1px solid #334155 !important;
+}
+
+body[data-theme="dark"] .methodology-card {
+    background: var(--panel-bg) !important;
+    border-color: var(--border-color) !important;
+}
+
+body[data-theme="dark"] .theme-toggle-btn {
+    background: var(--panel-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-main) !important;
+}
+
+body[data-theme="dark"] .voice-toggle-btn {
+    background: var(--panel-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-main) !important;
+}
+
+body[data-theme="dark"] .voice-toggle-btn.voice-on {
+    background: var(--sage) !important;
+    border-color: var(--accent) !important;
+    color: var(--accent) !important;
+}
+

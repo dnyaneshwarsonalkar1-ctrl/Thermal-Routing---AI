@@ -1,0 +1,19 @@
+{
+  "name": "coolroute-backend",
+  "version": "1.0.0",
+  "description": "AI Thermal Logistics Backend — Biophysical decay & weather-aware perishability routing",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node ../skills/test-backend.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.7",
+    "express": "^5.2.1"
+  }
+}

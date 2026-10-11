@@ -1,0 +1,10 @@
+{
+  "name": "routing-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npm --prefix temperature-based-optimal-path-finder--main start",
+    "serve:frontend": "npm --prefix temperature-based-optimal-path-finder--main run serve:frontend",
+    "test": "npm --prefix temperature-based-optimal-path-finder--main test"
+  }
+}

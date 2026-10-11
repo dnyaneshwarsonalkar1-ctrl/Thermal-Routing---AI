@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>coolroute — Gentle Thermal Routing for Fresh Harvests</title>
+    <meta name="description" content="Smart thermal routing for non-refrigerated produce transport. Protecting smallholder harvests from midday heat spikes with shaded microclimates and biophysical decay modeling.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Reenie+Beanie&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="landing.css">
+</head>
+<body>
+    <!-- Floating Blobs Background -->
+    <div class="blob blob-1 hero-blob-1" aria-hidden="true"></div>
+    <div class="blob blob-2 hero-blob-2" aria-hidden="true"></div>
+
+    <!-- Fixed Floating Pill Navbar -->
+    <header class="site-header">
+        <nav class="navbar-pill" aria-label="Main Navigation">
+            <!-- Brand Logo -->
+            <a href="#" class="nav-brand">
+                <div class="brand-dot"></div>
+                <span class="brand-name">coolroute</span>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="nav-links">
+                <a href="#how-it-works" class="nav-link">How it works</a>
+                <a href="#scenarios" class="nav-link">Scenarios</a>
+                <a href="#pipeline" class="nav-link">Pipeline</a>
+                <a href="#testimonials" class="nav-link">Diaries</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+            </div>
+
+            <!-- Actions -->
+            <div class="nav-actions">
+                <button type="button" id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Light / Dark Mode">
+                    <span id="theme-icon">🌙</span>
+                    <span id="theme-label">Dark</span>
+                </button>
+                <a href="/dashboard.html" class="btn-launch-pill" id="nav-launch-btn">
+                    <span class="live-indicator"></span>
+                    <span>Launch Live App</span>
+                </a>
+                <button type="button" class="mobile-toggle" id="mobile-toggle-btn" aria-label="Toggle navigation menu">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="4" x2="20" y1="12" y2="12"></line>
+                        <line x1="4" x2="20" y1="6" y2="6"></line>
+                        <line x1="4" x2="20" y1="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Drawer -->
+        <div class="mobile-drawer" id="mobile-drawer">
+            <a href="#how-it-works" class="mobile-nav-link">How it works</a>
+            <a href="#scenarios" class="mobile-nav-link">Scenarios</a>
+            <a href="#pipeline" class="mobile-nav-link">Pipeline</a>
+            <a href="#testimonials" class="mobile-nav-link">Diaries</a>
+            <a href="#faq" class="mobile-nav-link">FAQ</a>
+            <a href="/dashboard.html" class="btn-launch-pill" style="margin-top: 0.5rem; justify-content: center;">
+                <span class="live-indicator"></span>
+                <span>Launch Live App</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section 1 & 2: Hero -->
+        <section class="hero-section">
+            <div class="container-narrow">
+                <div class="soft-badge">
+                    <span class="badge-dot-green"></span>
+                    <span>Dynamic logistics • Non-refrigerated produce rescue</span>
+                </div>
+
+                <h1 class="hero-title">
+                    Move harvests <span class="handwritten-accent">gently</span>, before the heat does.
+                </h1>
+
+                <p class="hero-subtitle">
+                    Smart thermal routing for non-refrigerated trucks. We find shaded corridors and river breezes so fresh produce reaches the packhouse crisp and cool.
+                </p>
+
+                <div class="hero-cta-group">
+                    <a href="/dashboard.html" class="btn-primary-hero" id="hero-open-app-btn">
+                        <span>Open Command Center</span>
+                        <span class="bullet-dot"></span>
+                    </a>
+                    <a href="#how-it-works" class="btn-secondary-hero">
+                        <span>See how it works</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" x2="12" y1="5" y2="19"></line>
+                            <polyline points="19 12 12 19 5 12"></polyline>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Tactile micro-indicators -->
+                <div class="hero-micro-indicators">
+                    <div class="micro-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                        </svg>
+                        <span>Avoids 12–3 pm heat peaks</span>
+                    </div>
+                    <div class="micro-item">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                        <span>Preserves 38% more shelf life</span>
+                    </div>
+                    <div class="micro-item">
+                        <span style="width: 8px; height: 8px; border-radius: 9999px; background-color: var(--coral); display: inline-block;"></span>
+                        <span>0 mechanical chillers required</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Scenario Scroll -->
+        <section id="scenarios" class="scenarios-section container-wide reveal-on-scroll">
+            <div class="section-head-row">
+                <div>
+                    <div class="section-eyebrow">Real-world conditions</div>
+                    <h2 class="section-title">The invisible moments where harvests are lost.</h2>
+                </div>
+                <div class="scroll-controls">
+                    <button type="button" class="btn-scroll-arrow" id="scroll-scenario-left" aria-label="Scroll left">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="19" x2="5" y1="12" y2="12"></line>
+                            <polyline points="12 19 5 12 12 5"></polyline>
+                        </svg>
+                    </button>
+                    <button type="button" class="btn-scroll-arrow" id="scroll-scenario-right" aria-label="Scroll right">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" x2="19" y1="12" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="scenarios-scroll-row" id="scenario-container">
+                <!-- Card 1 -->
+                <div class="scenario-card">
+                    <div class="scenario-top">
+                        <span class="scenario-time">11:40 am</span>
+                        <span class="scenario-badge">Tarmac radiation</span>
+                    </div>
+                    <div>
+                        <p class="scenario-text">Tomatoes sit in a 36°C uninsulated truck for 3 hours</p>
+                        <div class="scenario-highlight">
+                            <span class="dot"></span>
+                            <span>Heat stress accelerates softening</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="scenario-card">
+                    <div class="scenario-top">
+                        <span class="scenario-time">6:15 am</span>
+                        <span class="scenario-badge">Microclimate bonus</span>
+                    </div>
+                    <div>
+                        <p class="scenario-text">Cooler morning ridge route is 18 km longer but saves 2 days shelf life</p>
+                        <div class="scenario-highlight">
+                            <span class="dot"></span>
+                            <span>Slower travel preserves freshness</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="scenario-card">
+                    <div class="scenario-top">
+                        <span class="scenario-time">2:00 pm</span>
+                        <span class="scenario-badge">Transpiration surge</span>
+                    </div>
+                    <div>
+                        <p class="scenario-text">Leafy greens lose cellular firmness 4x faster above 28°C</p>
+                        <div class="scenario-highlight">
+                            <span class="dot"></span>
+                            <span>Ultra-perishable payload</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="scenario-card">
+                    <div class="scenario-top">
+                        <span class="scenario-time">Heat spike ahead</span>
+                        <span class="scenario-badge">Telemetry alert</span>
+                    </div>
+                    <div>
+                        <p class="scenario-text">Open valley traffic jam detected; system reroutes to tree-shaded bypass</p>
+                        <div class="scenario-highlight">
+                            <span class="dot"></span>
+                            <span>Dynamic in-transit rescue</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="scenario-card">
+                    <div class="scenario-top">
+                        <span class="scenario-time">1:15 pm</span>
+                        <span class="scenario-badge">Radiant loading</span>
+                    </div>
+                    <div>
+                        <p class="scenario-text">Direct midday solar glare heats sheet-metal cargo bed to 42°C</p>
+                        <div class="scenario-highlight">
+                            <span class="dot"></span>
+                            <span>Thermal barrier advised</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="scenario-card">
+                    <div class="scenario-top">
+                        <span class="scenario-time">4:30 pm</span>
+                        <span class="scenario-badge">Gate queue forecast</span>
+                    </div>
+                    <div>
+                        <p class="scenario-text">Central facility cold-intake dock queue reaches 45-minute delay</p>
+                        <div class="scenario-highlight">
+                            <span class="dot"></span>
+                            <span>Intake coordination active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 9-Step Pipeline Architecture -->
+        <section id="how-it-works" class="pipeline-section container-wide reveal-on-scroll">
+            <div id="pipeline" style="position: relative; top: -80px;"></div>
+            <div class="section-centered-header">
+                <div class="badge-purple">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b21a8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                        <rect x="9" y="9" width="6" height="6"></rect>
+                        <line x1="9" y1="1" x2="9" y2="4"></line>
+                        <line x1="15" y1="1" x2="15" y2="4"></line>
+                        <line x1="9" y1="20" x2="9" y2="23"></line>
+                        <line x1="15" y1="20" x2="15" y2="23"></line>
+                        <line x1="20" y1="9" x2="23" y2="9"></line>
+                        <line x1="20" y1="14" x2="23" y2="14"></line>
+                        <line x1="1" y1="9" x2="4" y2="9"></line>
+                        <line x1="1" y1="14" x2="4" y2="14"></line>
+                    </svg>
+                    <span>Transparent 9-step methodology</span>
+                </div>
+                <h2 class="section-title" style="font-size: 2.25rem;">How thermal routing protects the harvest</h2>
+                <p style="color: var(--text-muted); font-size: 1.05rem; margin-top: 0.75rem;">
+                    From farmgate pickup to the central processing cold dock — each kilometer is evaluated for radiant asphalt heat, tree canopy shade, and biological respiration stress.
+                </p>
+            </div>
+
+            <div class="pipeline-grid">
+                <!-- Step 1 -->
+                <div class="pipeline-card theme-sage">
+                    <div>
+                        <div class="pipeline-card-top">
+                            <span class="step-num">01</span>
+                            <span class="step-tag">Data Ingestion</span>
+                        </div>
+                        <h3>Farm locations & cargo data</h3>
+                        <p>Ingests smallholder farm coordinates, picked crop varieties, crate counts, and baseline harvest temperature.</p>
+                    </div>
+                    <div class="pipeline-card-footer">
+                        <span>Phase Analysis</span>
+                        <span class="handwritten-note">calibrated telemetry</span>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="pipeline-card theme-lavender">
+                    <div>
+                        <div class="pipeline-card-top">
+                            <span class="step-num">02</span>
+                            <span class="step-tag">Network Graph</span>
+                        </div>
+                        <h3>Route generation</h3>
+                        <p>Synthesizes multi-corridor driving alternatives avoiding low-clearance paths and non-traversable dirt roads.</p>
+                    </div>
+                    <div class="pipeline-card-footer">
+                        <span>Phase Analysis</span>
+                        <span class="handwritten-note">multi-corridor graph</span>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="pipeline-card theme-sage">
+                    <div>
+                        <div class="pipeline-card-top">
+                            <span class="step-num">03</span>
+                            <span class="step-tag">Kinematics</span>
+                        </div>
+                        <h3>Travel time & distance analysis</h3>
+                        <p>Computes road-segment transit durations factoring in rural village slowdowns and non-refrigerated truck speeds.</p>
+                    </div>
+                    <div class="pipeline-card-footer">
+                        <span>Phase Analysis</span>
+                        <span class="handwritten-note">rural speed profiles</span>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="pipeline-card theme-lavender">
+                    <div>
+                        <div class="pipeline-card-top">
+                            <span class="step-num">04</span>
+                            <span class="step-tag">Meteorology</span>
+                        </div>
+                        <h3>Weather & temperature analysis</h3>
+                        <p>Samples microclimate forecasts, ambient tarmac heat, and solar irradiance curves per kilometer.</p>
+                    </div>
+                    <div class="pipeline-card-footer">
+                        <span>Phase Analysis</span>
+                        <span class="handwritten-note">Open-Meteo microgrids</span>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="pipeline-card theme-sage">
+                    <div>
+                        <div class="pipeline-card-top">
+                            <span class="step-num">05</span>
+                            <span class="step-tag">Thermal Physics</span>
+                        </div>
+                        <h3>Thermal load estimation</h3>
+                        <p>Calculates cumulative degree-minutes exceeding the crop's physiological decay threshold using Q10 biophysical curves.</p>
+                    </div>
+                    <div class="pipeline-card-footer">
+                        <span>Phase Optimization</span>
+                        <span class="handwritten-note">degree-minutes model</span>
+                    </div>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="pipeline-card theme-lavender">
+                    <div>
+                        <div class="pipeline-card-top">
+                            <span class="step-num">06</span>
+                            <span class="step-tag">Risk Engine</span>
+                        </div>
+                        <h3>Route risk assessment</h3>
+                        <p>Evaluates multi-factor spoilage vulnerability combining heat stress, transit duration, and crop fragility.</p>
+                    </div>
+                    <div class="pipeline-card-footer">
+                        <span>Phase Optimization</span>
+                        <span class="handwritten-note">spoilage scoring</span>
+                    </div>
+                </div>
+
+                <!-- Step 7 -->
+                <div class="pipeline-card theme-sage">
+                    <div>
+                        <div class="pipeline-card-top">
+                            <span class="step-num">07</span>
+                            <span class="step-tag">Multi-Objective Optimization</span>
+                        </div>
+                        <h3>Dynamic route optimization</h3>
+                        <p>Re-ranks candidate corridors against live speed vs freshness weighting preferences.</p>
+                    </div>
+                    <div class="pipeline-card-footer">
+                        <span>Phase Optimization</span>
+                        <span class="handwritten-note">Pareto frontier</span>
+                    </div>
+                </div>
+
+                <!-- Step 8 -->
+                <div class="pipeline-card theme-lavender">
+                    <div>
+                        <div class="pipeline-card-top">
+                            <span class="step-num">08</span>
+                            <span class="step-tag">Decision Support</span>
+                        </div>
+                        <h3>Recommended route with explanation</h3>
+                        <p>Presents the optimal corridor alongside clear, plain-language trade-off explainability for drivers.</p>
+                    </div>
+                    <div class="pipeline-card-footer">
+                        <span>Phase Execution</span>
+                        <span class="handwritten-note">explainable trade-offs</span>
+                    </div>
+                </div>
+
+                <!-- Step 9 -->
+                <div class="pipeline-card theme-sage">
+                    <div>
+                        <div class="pipeline-card-top">
+                            <span class="step-num">09</span>
+                            <span class="step-tag">Telemetry & Rerouting</span>
+                        </div>
+                        <h3>Continuous in-transit monitoring</h3>
+                        <p>Streams live telemetry from vehicle sensors and dynamically reroutes when an unexpected heat spike occurs.</p>
+                    </div>
+                    <div class="pipeline-card-footer">
+                        <span>Phase Execution</span>
+                        <span class="handwritten-note">real-time autopilot</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pipeline-summary-card">
+                <div class="summary-left">
+                    <div class="icon-box-coral">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                        </svg>
+                    </div>
+                    <div>
+                        <div style="font-weight: 600; font-size: 0.95rem; color: var(--text-dark);">
+                            Continuous loop from dispatch to delivery
+                        </div>
+                        <div style="font-size: 0.82rem; color: var(--text-muted);">
+                            Unlike static GPS, candidate corridors adapt whenever ambient midday temperatures climb unexpectedly.
+                        </div>
+                    </div>
+                </div>
+                <div style="font-family: var(--font-handwritten); font-size: 1.6rem; color: var(--coral-dark); white-space: nowrap;">
+                    harvest freshness preserved ~
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Farmer Diaries Testimonials -->
+        <section id="testimonials" class="testimonials-section container-wide reveal-on-scroll">
+            <div class="section-centered-header">
+                <div class="badge-green">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
+                    </svg>
+                    <span>Voices from the farmgate</span>
+                </div>
+                <h2 class="section-title" style="font-size: 2.25rem;">Field diaries on temperature and trust</h2>
+                <p style="color: var(--text-muted); font-size: 1.05rem; margin-top: 0.75rem;">
+                    Smallholders without multi-lakh cold chain infrastructure share how smart thermal corridors protect their crop income.
+                </p>
+            </div>
+
+            <div class="testimonials-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card rot-neg">
+                    <div>
+                        <div class="quote-icon-circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
+                                <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
+                            </svg>
+                        </div>
+                        <p class="quote-text">
+                            "Last July, our cherry tomatoes arrived soft and split at the APMC Mandi. coolroute guided our open-bed truck through the misty river bypass — 100% grade-A acceptance and no distress dumping."
+                        </p>
+                    </div>
+                    <div class="author-section">
+                        <div class="author-sig-row">
+                            <div class="sig-rule"></div>
+                            <span class="sig-name">Ramesh Patel</span>
+                        </div>
+                        <div class="author-role">Chairperson, SunRidge Farmer Producer Organization</div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card rot-pos">
+                    <div>
+                        <div class="quote-icon-circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
+                                <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
+                            </svg>
+                        </div>
+                        <p class="quote-text">
+                            "When you run non-refrigerated pickup routes, every Celsius degree equals lost income. Taking 14 extra minutes through shaded country roads saved 240 kg of tender baby spinach from heat burn."
+                        </p>
+                    </div>
+                    <div class="author-section">
+                        <div class="author-sig-row">
+                            <div class="sig-rule"></div>
+                            <span class="sig-name">Amara Okafor</span>
+                        </div>
+                        <div class="author-role">Lead Logistics Coordinator, Greenfield Smallholders</div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card rot-neg">
+                    <div>
+                        <div class="quote-icon-circle">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
+                                <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"></path>
+                            </svg>
+                        </div>
+                        <p class="quote-text">
+                            "Smallholder farmers cannot afford diesel-powered reefer trucks. This system gives our drivers an invisible thermal radar. We cut transit spoil by 38% in our very first week."
+                        </p>
+                    </div>
+                    <div class="author-section">
+                        <div class="author-sig-row">
+                            <div class="sig-rule"></div>
+                            <span class="sig-name">Mateo Silva</span>
+                        </div>
+                        <div class="author-role">Regional Dispatch Director, Valley Fresh Express</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: FAQ Accordion -->
+        <section id="faq" class="faq-section reveal-on-scroll">
+            <div class="section-centered-header" style="margin-bottom: 2.5rem;">
+                <div class="badge-purple">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#6b21a8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+                        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    </svg>
+                    <span>Clarity & Methodology</span>
+                </div>
+                <h2 class="section-title" style="font-size: 2.25rem;">Frequently asked questions</h2>
+                <p style="color: var(--text-muted); font-size: 1rem; margin-top: 0.5rem;">
+                    Everything you need to know about thermal load calculations, unchilled transport limits, and dynamic reroutes.
+                </p>
+            </div>
+
+            <div class="faq-list">
+                <!-- FAQ 1 (open by default) -->
+                <div class="faq-item open">
+                    <button type="button" class="faq-button" aria-expanded="true">
+                        <span class="faq-question">How is thermal load calculated?</span>
+                        <div class="faq-toggle-icon">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            Thermal load is modeled by integrating time-temperature exposure above each crop's physiological threshold using the standard Q10 biophysical factor: heat factor = 2^((T - T_ref)/10). For example, unshaded highway segments at 36°C generate exponential thermal decay compared to shaded 26°C river corridors.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item">
+                    <button type="button" class="faq-button" aria-expanded="false">
+                        <span class="faq-question">Do the transport vehicles need mechanical refrigeration?</span>
+                        <div class="faq-toggle-icon">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            No! The entire purpose of coolroute is to protect produce transported in standard, non-refrigerated vehicles (such as open-bed pickups, canvas-topped trucks, and three-wheelers) by utilizing natural microclimates, tree canopies, cooler elevations, and optimized departure timing.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item">
+                    <button type="button" class="faq-button" aria-expanded="false">
+                        <span class="faq-question">What data sources are used for temperatures and road conditions?</span>
+                        <div class="faq-toggle-icon">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            The engine integrates OpenStreetMap network routing via OSRM, batched Open-Meteo microclimate forecasting along highway and rural road corridors, and automated offline failover caches for 100% resilience during network drops.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="faq-item">
+                    <button type="button" class="faq-button" aria-expanded="false">
+                        <span class="faq-question">Can the system change routes mid-trip?</span>
+                        <div class="faq-toggle-icon">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            Yes. The Live Monitoring engine continuously tracks transit progress. If road congestion causes prolonged idling in a heat pocket or weather stations detect an unexpected heat spike, the driver receives an alert with an alternate shaded detour before cargo degrades.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="faq-item">
+                    <button type="button" class="faq-button" aria-expanded="false">
+                        <span class="faq-question">Which produce varieties are most vulnerable to heat decay?</span>
+                        <div class="faq-toggle-icon">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            Leafy greens (T_ref 10°C, k=0.022) and fresh berries are most vulnerable to rapid respiration breakdown. Tomatoes and mangoes follow, while hearty root crops like potatoes and onions (T_ref 15°C, k=0.003) have thick protective skins and tolerate elevated ambient heat much longer.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ 6 -->
+                <div class="faq-item">
+                    <button type="button" class="faq-button" aria-expanded="false">
+                        <span class="faq-question">How does the multi-criteria optimization balance speed and freshness?</span>
+                        <div class="faq-toggle-icon">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="faq-answer-collapse">
+                        <div class="faq-answer-body">
+                            The composite biophysical objective function weighs transit time (20%), mileage (5%), and quality preservation (75%) plus hard deadline breach penalties (500 pts). The system finds Pareto-optimal corridors where avoiding midday heat saves thousands of rupees in market cargo value.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Waitlist CTA & Footer -->
+        <section class="waitlist-section container-wide reveal-on-scroll">
+            <div class="blob blob-1" style="bottom: 2rem; left: 20%;" aria-hidden="true"></div>
+            <div class="blob blob-2" style="bottom: 4rem; right: 20%;" aria-hidden="true"></div>
+
+            <div class="waitlist-icon-sq">
+                <div class="inner-dot"></div>
+            </div>
+
+            <h2 class="waitlist-title">Ready to save the next harvest?</h2>
+            <p class="waitlist-desc">
+                Deploy heat-aware route guidance across smallholder farmer cooperatives and rural logistics fleets.
+            </p>
+
+            <form class="waitlist-form" id="waitlist-form">
+                <div class="waitlist-input-wrapper">
+                    <input type="email" id="waitlist-email" required placeholder="Enter your co-op or work email" class="waitlist-input">
+                </div>
+                <button type="submit" class="waitlist-submit">
+                    <span>Join waitlist</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </form>
+
+            <div class="waitlist-success-box" id="waitlist-success">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-weight: 500; color: #166534; margin-bottom: 0.25rem;">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>You're on the early access pilot list!</span>
+                </div>
+                <p style="font-size: 0.78rem; color: var(--text-muted);">
+                    We'll send you our unchilled produce temperature corridor benchmarks and API documentation.
+                </p>
+            </div>
+
+            <div style="margin-top: 2rem;">
+                <a href="/dashboard.html" class="btn-primary-hero" style="font-size: 0.95rem; padding: 0.75rem 1.85rem;">
+                    <span>Launch Live Command Center</span>
+                    <span class="bullet-dot"></span>
+                </a>
+            </div>
+
+            <div class="waitlist-closing-tag">
+                gently moving produce across sunlit miles ~
+            </div>
+
+            <!-- Footer -->
+            <footer class="site-footer">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <div style="width: 1rem; height: 1rem; border-radius: 9999px; background-color: var(--coral); display: inline-flex; align-items: center; justify-content: center;">
+                        <span style="width: 0.35rem; height: 0.35rem; border-radius: 9999px; background-color: #fff;"></span>
+                    </div>
+                    <span style="font-weight: 600; color: var(--text-dark);">coolroute</span>
+                    <span>• Problem AI26AG02 Dynamic Logistics</span>
+                </div>
+
+                <div class="footer-links">
+                    <a href="#how-it-works">Methodology</a>
+                    <a href="/dashboard.html">Live Dashboard</a>
+                    <a href="#scenarios">Scenarios</a>
+                    <a href="#faq">Documentation</a>
+                </div>
+
+                <div>
+                    <span>Built with 'Softly' Design System</span>
+                </div>
+            </footer>
+        </section>
+    </main>
+
+    <!-- Client-side Interactive Behaviors -->
+    <script>
+        // 1. Reveal on scroll using IntersectionObserver
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+        // 2. Mobile drawer toggle
+        const toggleBtn = document.getElementById('mobile-toggle-btn');
+        const mobileDrawer = document.getElementById('mobile-drawer');
+        if (toggleBtn && mobileDrawer) {
+            toggleBtn.addEventListener('click', () => {
+                mobileDrawer.classList.toggle('open');
+            });
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileDrawer.classList.remove('open');
+                });
+            });
+        }
+
+        // 3. Scenario scroll buttons
+        const scenarioContainer = document.getElementById('scenario-container');
+        const scrollLeftBtn = document.getElementById('scroll-scenario-left');
+        const scrollRightBtn = document.getElementById('scroll-scenario-right');
+        if (scenarioContainer && scrollLeftBtn && scrollRightBtn) {
+            scrollLeftBtn.addEventListener('click', () => {
+                scenarioContainer.scrollBy({ left: -320, behavior: 'smooth' });
+            });
+            scrollRightBtn.addEventListener('click', () => {
+                scenarioContainer.scrollBy({ left: 320, behavior: 'smooth' });
+            });
+        }
+
+        // 4. FAQ Accordion toggle
+        document.querySelectorAll('.faq-button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.faq-item');
+                const wasOpen = item.classList.contains('open');
+                // Close others for clean single-expanded view
+                document.querySelectorAll('.faq-item').forEach(i => {
+                    i.classList.remove('open');
+                    const b = i.querySelector('.faq-button');
+                    if (b) b.setAttribute('aria-expanded', 'false');
+                });
+                if (!wasOpen) {
+                    item.classList.add('open');
+                    btn.setAttribute('aria-expanded', 'true');
+                }
+            });
+        });
+
+        // 5. Waitlist Form Handler
+        const waitlistForm = document.getElementById('waitlist-form');
+        const waitlistSuccess = document.getElementById('waitlist-success');
+        if (waitlistForm && waitlistSuccess) {
+            waitlistForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const emailInput = document.getElementById('waitlist-email');
+                if (emailInput && emailInput.value && emailInput.value.includes('@')) {
+                    waitlistForm.style.display = 'none';
+                    waitlistSuccess.style.display = 'block';
+                }
+            });
+        }
+
+        // 6. Dark / Light Theme Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle-btn');
+        const themeIcon = document.getElementById('theme-icon');
+        const themeLabel = document.getElementById('theme-label');
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                if (themeIcon) themeIcon.textContent = '☀️';
+                if (themeLabel) themeLabel.textContent = 'Light';
+            } else {
+                document.body.removeAttribute('data-theme');
+                if (themeIcon) themeIcon.textContent = '🌙';
+                if (themeLabel) themeLabel.textContent = 'Dark';
+            }
+            try { localStorage.setItem('coolroute_theme', theme); } catch (e) {}
+        }
+
+        const savedTheme = localStorage.getItem('coolroute_theme');
+        if (savedTheme) {
+            applyTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            applyTheme('dark');
+        }
+
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => {
+                const currentTheme = document.body.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                applyTheme(newTheme);
+            });
+        }
+    </script>
+</body>
+</html>

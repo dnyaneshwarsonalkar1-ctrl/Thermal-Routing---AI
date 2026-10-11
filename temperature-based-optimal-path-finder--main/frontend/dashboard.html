@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>coolroute — Thermal Route Command Center</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Reenie+Beanie&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Navigation Header -->
+    <header class="app-header">
+        <div class="header-inner">
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <a href="/" class="nav-back-btn">← Back to Overview</a>
+                <div class="logo-container">
+                    <div class="brand-dot"></div>
+                    <h1>coolroute</h1>
+                    <span class="subtitle">AI Thermal Logistics Control Center</span>
+                </div>
+            </div>
+
+            <!-- Soft Info Badge from Pic 2 -->
+            <div class="soft-badge header-info-badge">
+                <span class="badge-dot-green"></span>
+                <span>Dynamic logistics • Non-refrigerated produce rescue</span>
+            </div>
+
+            <!-- Header Controls: Theme, Voice, Methodology -->
+            <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+                <button type="button" id="theme-toggle-btn" class="theme-toggle-btn" title="Toggle Light / Dark Mode">
+                    <span class="toggle-icon" id="theme-icon">🌙</span>
+                    <span id="theme-label">Dark Mode</span>
+                </button>
+
+                <button type="button" id="voice-toggle-btn" class="voice-toggle-btn voice-on" title="Toggle Voice Navigation">
+                    <span class="toggle-icon" id="voice-icon">🔊</span>
+                    <span id="voice-label">Voice: ON</span>
+                </button>
+
+                <button type="button" id="toggle-methodology-btn" class="methodology-pill-btn">
+                    <span>📖 9-Step Pipeline & Insights</span>
+                    <span id="drawer-arrow">↓</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Collapsible Methodology & Info Drawer from Pic 2 -->
+    <div id="methodology-drawer">
+        <div style="max-width: 1140px; margin: 0 auto;">
+            <div style="display: flex; flex-direction: column; md:flex-row; justify-content: space-between; align-items: flex-start; gap: 1.5rem; margin-bottom: 1.5rem;">
+                <div>
+                    <h2 style="font-size: 1.75rem; font-weight: 500; color: var(--text-main); letter-spacing: -0.02em; margin-bottom: 0.35rem;">
+                        Move harvests <span class="font-handwritten" style="font-size: 2.2rem; color: #FF8E88; display: inline-block; transform: rotate(-2deg);">gently</span>, before the heat does.
+                    </h2>
+                    <p style="font-size: 0.92rem; color: var(--text-muted); max-width: 640px; line-height: 1.5;">
+                        Smart thermal routing for non-refrigerated trucks. We find shaded corridors and river breezes so fresh produce reaches the packhouse crisp and cool.
+                    </p>
+                </div>
+                <div style="display: flex; gap: 1.25rem; flex-wrap: wrap; font-size: 0.8rem; color: var(--text-muted); background: var(--badge-bg); padding: 0.75rem 1.25rem; border-radius: 9999px; border: 1px solid var(--border-color);">
+                    <div style="display: flex; align-items: center; gap: 0.4rem;">
+                        <span style="color: var(--accent); font-weight: bold;">🌡</span>
+                        <span>Avoids 12–3 pm heat peaks</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.4rem;">
+                        <span style="color: var(--accent); font-weight: bold;">🛡</span>
+                        <span>Preserves 38% more shelf life</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.4rem;">
+                        <span style="width: 7px; height: 7px; border-radius: 9999px; background: #FFB7B2; display: inline-block;"></span>
+                        <span>0 mechanical chillers required</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 9-Step Methodology Grid -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
+                <div class="methodology-card" style="background: var(--sage); border: 1px solid var(--border-color); border-radius: 1rem; padding: 1rem;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 0.4rem;">
+                        <strong style="color: var(--accent);">01 INGESTION</strong>
+                        <span style="color: var(--text-muted);">Analysis</span>
+                    </div>
+                    <div style="font-weight: 600; font-size: 0.9rem; color: var(--text-main); margin-bottom: 0.25rem;">Farm locations & cargo data</div>
+                    <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4;">Ingests smallholder coordinates, crop varieties, crate counts, and baseline harvest temperature.</p>
+                </div>
+
+                <div class="methodology-card" style="background: var(--lavender); border: 1px solid var(--border-color); border-radius: 1rem; padding: 1rem;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 0.4rem;">
+                        <strong style="color: var(--cyan);">02 ROUTING GRAPH</strong>
+                        <span style="color: var(--text-muted);">Analysis</span>
+                    </div>
+                    <div style="font-weight: 600; font-size: 0.9rem; color: var(--text-main); margin-bottom: 0.25rem;">Multi-corridor generation</div>
+                    <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4;">OSRM driving alternatives bypassing slow gravel and heavy midday congestion traps.</p>
+                </div>
+
+                <div class="methodology-card" style="background: var(--sage); border: 1px solid var(--border-color); border-radius: 1rem; padding: 1rem;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 0.4rem;">
+                        <strong style="color: var(--accent);">03 METEOROLOGY</strong>
+                        <span style="color: var(--text-muted);">Weather Grid</span>
+                    </div>
+                    <div style="font-weight: 600; font-size: 0.9rem; color: var(--text-main); margin-bottom: 0.25rem;">Open-Meteo microclimates</div>
+                    <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4;">Samples radiant tarmac heat and hourly forecasts along each road waypoint.</p>
+                </div>
+
+                <div class="methodology-card" style="background: var(--lavender); border: 1px solid var(--border-color); border-radius: 1rem; padding: 1rem;">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; margin-bottom: 0.4rem;">
+                        <strong style="color: var(--cyan);">05 BIOPHYSICAL DECAY</strong>
+                        <span style="color: var(--text-muted);">Optimization</span>
+                    </div>
+                    <div style="font-weight: 600; font-size: 0.9rem; color: var(--text-main); margin-bottom: 0.25rem;">Q10 Thermal factor model</div>
+                    <p style="font-size: 0.78rem; color: var(--text-muted); line-height: 1.4;">Calculates accumulated degree-hours above baseline T_ref to predict quality % at arrival.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Workspace Container -->
+    <main class="app-container">
+        <!-- Left Sidebar: Route Configuration & Engine Controls -->
+        <div id="control-panel" class="sidebar">
+            <div class="panel-section">
+                <h2>Route Configuration</h2>
+                <div class="form-group">
+                    <label for="produce-type">Produce Type</label>
+                    <select id="produce-type" class="custom-select">
+                        <option value="tomato">Tomato</option>
+                        <option value="leafy_greens">Leafy Greens</option>
+                        <option value="mango">Mango</option>
+                        <option value="potato_onion">Potato / Onion</option>
+                        <option value="custom">🧪 Custom Lab Crop</option>
+                    </select>
+                    <button type="button" id="toggle-custom-crop-btn" class="custom-toggle-btn">🧪 + Custom Crop / Lab Tuner</button>
+                    <div id="custom-crop-tray" class="custom-crop-tray" style="display: none; margin-top: 8px;">
+                        <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px; font-weight: 500;">
+                            Lab Biophysical & Mandi Tuning:
+                        </div>
+                        <div class="custom-input-group" style="margin-bottom: 6px;">
+                            <label for="custom-crop-name">Crop Name</label>
+                            <input type="text" id="custom-crop-name" value="Strawberries">
+                        </div>
+                        <div class="custom-input-row" style="display: flex; gap: 6px; margin-bottom: 6px;">
+                            <div class="custom-input-group" style="flex: 1;">
+                                <label for="custom-crop-tref">Baseline T_ref (°C)</label>
+                                <input type="number" id="custom-crop-tref" step="0.5" value="10">
+                            </div>
+                            <div class="custom-input-group" style="flex: 1;">
+                                <label for="custom-crop-k">Decay Sens. (k)</label>
+                                <input type="number" id="custom-crop-k" step="0.001" value="0.025">
+                            </div>
+                        </div>
+                        <div class="custom-input-group">
+                            <label for="custom-crop-price">Market Rate (₹/kg)</label>
+                            <input type="number" id="custom-crop-price" step="1" value="120">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 15px;">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <input type="checkbox" id="multi-farm-pickup" style="width: auto; accent-color: #10b981;">
+                        Multi-Farm Pickup (Dual Waypoints)
+                    </label>
+                    <button type="button" id="toggle-custom-loc-btn" class="custom-toggle-btn">📍 Custom Farm Location</button>
+                    
+                    <div id="custom-loc-tray" class="custom-crop-tray" style="display: none; margin-top: 8px;">
+                        <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px; font-weight: 500;">
+                            Select a regional farm hub or click on the map:
+                        </div>
+                        
+                        <!-- 1-Click Quick Presets -->
+                        <div class="preset-loc-buttons" style="display: flex; gap: 6px; margin-bottom: 10px; flex-wrap: wrap;">
+                            <button type="button" class="preset-btn" data-name="Ranebennur Farm" data-lat="14.6231" data-lng="75.6218">Ranebennur</button>
+                            <button type="button" class="preset-btn" data-name="Channagiri Farm" data-lat="14.0278" data-lng="75.9283">Channagiri</button>
+                            <button type="button" class="preset-btn" data-name="Chitradurga Belt" data-lat="14.2251" data-lng="76.3980">Chitradurga</button>
+                        </div>
+
+                        <!-- Coordinate Inputs -->
+                        <div class="custom-input-group" style="margin-bottom: 8px;">
+                            <label for="custom-origin-name">Location Name</label>
+                            <input type="text" id="custom-origin-name" value="Custom Farm Location">
+                        </div>
+                        <div class="custom-input-row" style="display: flex; gap: 8px; margin-bottom: 8px;">
+                            <div class="custom-input-group" style="flex: 1;">
+                                <label for="custom-origin-lat">Latitude</label>
+                                <input type="number" id="custom-origin-lat" step="0.0001" value="14.6231">
+                            </div>
+                            <div class="custom-input-group" style="flex: 1;">
+                                <label for="custom-origin-lng">Longitude</label>
+                                <input type="number" id="custom-origin-lng" step="0.0001" value="75.6218">
+                            </div>
+                        </div>
+
+                        <!-- Direct Map Click Button -->
+                        <button type="button" id="map-pick-mode-btn" class="map-pick-btn">
+                            🎯 Click on Map to Set Farm
+                        </button>
+                    </div>
+
+                    <!-- Dedicated Dual Waypoint Tray for Multi-Farm Pickup -->
+                    <div id="multi-farm-waypoints-tray" class="custom-crop-tray" style="display: none; margin-top: 8px;">
+                        <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 8px; font-weight: 500;">
+                            Configure both pickup waypoints for sequence evaluation:
+                        </div>
+
+                        <!-- WAYPOINT A (Farm 1) -->
+                        <div class="waypoint-card">
+                            <div class="waypoint-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <span style="font-weight: 700; font-size: 12px; color: #10b981;">① WAYPOINT A: Farm 1</span>
+                                <span class="waypoint-badge" style="font-size: 10px; background: #E8EFE8; color: #15803d; padding: 2px 6px; border-radius: 4px; font-weight: 600;">Stop 1</span>
+                            </div>
+                            
+                            <div class="preset-loc-buttons" style="display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap;">
+                                <button type="button" class="preset-btn farm-preset-btn" data-target="farm1" data-name="Harihar Farm" data-lat="14.5126" data-lng="75.8055">Harihar</button>
+                                <button type="button" class="preset-btn farm-preset-btn" data-target="farm1" data-name="Ranebennur Farm" data-lat="14.6231" data-lng="75.6218">Ranebennur</button>
+                            </div>
+
+                            <div class="custom-input-group" style="margin-bottom: 6px;">
+                                <label for="farm1-name">Farm 1 Name</label>
+                                <input type="text" id="farm1-name" value="Harihar Farm">
+                            </div>
+                            <div class="custom-input-row" style="display: flex; gap: 6px; margin-bottom: 8px;">
+                                <div class="custom-input-group" style="flex: 1;">
+                                    <label for="farm1-lat">Latitude</label>
+                                    <input type="number" id="farm1-lat" step="0.0001" value="14.5126">
+                                </div>
+                                <div class="custom-input-group" style="flex: 1;">
+                                    <label for="farm1-lng">Longitude</label>
+                                    <input type="number" id="farm1-lng" step="0.0001" value="75.8055">
+                                </div>
+                            </div>
+                            <button type="button" id="pick-farm1-btn" class="map-pick-btn" style="padding: 6px 10px; font-size: 11px;">
+                                🎯 Set Farm 1 on Map
+                            </button>
+                        </div>
+
+                        <!-- WAYPOINT B (Farm 2) -->
+                        <div class="waypoint-card" style="margin-top: 10px;">
+                            <div class="waypoint-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                <span style="font-weight: 700; font-size: 12px; color: #0284c7;">② WAYPOINT B: Farm 2</span>
+                                <span class="waypoint-badge" style="font-size: 10px; background: #e0f2fe; color: #0369a1; padding: 2px 6px; border-radius: 4px; font-weight: 600;">Stop 2</span>
+                            </div>
+
+                            <div class="preset-loc-buttons" style="display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap;">
+                                <button type="button" class="preset-btn farm-preset-btn" data-target="farm2" data-name="Honnali Farm" data-lat="14.2407" data-lng="75.6323">Honnali</button>
+                                <button type="button" class="preset-btn farm-preset-btn" data-target="farm2" data-name="Channagiri Farm" data-lat="14.0278" data-lng="75.9283">Channagiri</button>
+                            </div>
+
+                            <div class="custom-input-group" style="margin-bottom: 6px;">
+                                <label for="farm2-name">Farm 2 Name</label>
+                                <input type="text" id="farm2-name" value="Honnali Farm">
+                            </div>
+                            <div class="custom-input-row" style="display: flex; gap: 6px; margin-bottom: 8px;">
+                                <div class="custom-input-group" style="flex: 1;">
+                                    <label for="farm2-lat">Latitude</label>
+                                    <input type="number" id="farm2-lat" step="0.0001" value="14.2407">
+                                </div>
+                                <div class="custom-input-group" style="flex: 1;">
+                                    <label for="farm2-lng">Longitude</label>
+                                    <input type="number" id="farm2-lng" step="0.0001" value="75.6323">
+                                </div>
+                            </div>
+                            <button type="button" id="pick-farm2-btn" class="map-pick-btn" style="padding: 6px 10px; font-size: 11px;">
+                                🎯 Set Farm 2 on Map
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="departure-time">Departure Time</label>
+                    <select id="departure-time" class="custom-select">
+                        <option value="6">06:00 (Early Morning)</option>
+                        <option value="10" selected>10:00 (Mid Morning)</option>
+                        <option value="14">14:00 (Peak Heat)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="delivery-deadline">Delivery Deadline (hrs)</label>
+                    <input type="number" id="delivery-deadline" class="custom-input" placeholder="e.g. 4" min="0.1" step="0.1" value="4">
+                </div>
+                <div class="form-group">
+                    <label for="cargo-weight">Cargo Weight (kg)</label>
+                    <input type="number" id="cargo-weight" class="custom-input" placeholder="e.g. 500" min="1">
+                </div>
+                <button id="calculate-route-btn" class="primary-btn">
+                    <span class="btn-text">Calculate Optimal Route</span>
+                    <span class="btn-icon">→</span>
+                </button>
+            </div>
+            
+            <!-- APMC Mandi Benchmark Section -->
+            <div class="panel-section" id="mandi-benchmark-section">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                    <span style="font-size: 11px; font-weight: 700; color: #15803d; letter-spacing: 0.5px;">
+                        🟢 LIVE APMC DAVANAGERE MANDI BENCHMARK
+                    </span>
+                    <span id="mandi-timestamp" style="font-size: 10px; color: var(--text-muted);">10:30 AM (Live Sync)</span>
+                </div>
+                <div class="mandi-price-box">
+                    <div>
+                        <div id="mandi-crop-label" style="font-size: 11px; color: var(--text-muted); font-weight: 500;">Tomato Benchmark Rate</div>
+                        <div id="mandi-rate-display" style="font-size: 18px; font-weight: 800; color: #059669; margin-top: 2px;">₹36.50 / kg</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div style="font-size: 11px; color: var(--text-muted); font-weight: 500;">Est. Cargo Value</div>
+                        <div id="mandi-cargo-value" style="font-size: 15px; font-weight: 700; color: var(--text-main); margin-top: 2px;">₹36,500</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logistics Summary -->
+            <div class="panel-section">
+                <h2>Logistics Summary</h2>
+                <div class="summary-stats">
+                    <div class="stat-box">
+                        <span class="stat-label">Total Distance</span>
+                        <span class="stat-value" id="stat-distance">-- km</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-label">Est. Decay Risk</span>
+                        <span class="stat-value" id="stat-decay">-- %</span>
+                    </div>
+                </div>
+                <div id="telemetry-status" class="telemetry-badge online">Telemetry: Ready</div>
+            </div>
+
+            <!-- Ranked Alternatives -->
+            <div class="panel-section" id="route-alternatives-container" style="display: none;">
+                <h2>Route Alternatives</h2>
+                <div id="ai-decision-banner" class="ai-banner"></div>
+                <div id="route-cards"></div>
+                <div id="weather-telemetry" class="telemetry-badge online" style="display:none; margin-top:1rem;">Weather: Ready</div>
+            </div>
+
+            <!-- Continuous In-Transit Monitoring -->
+            <div class="panel-section" id="continuous-monitoring-container" style="display: none;">
+                <h2>Continuous Thermal Monitoring <span class="badge-tag" style="background: var(--sage); color: #15803d;">[SIMULATION]</span></h2>
+                <div class="form-group">
+                    <label id="heatwave-slider-label" for="heatwave-slider">Heatwave Stress Test: +0°C</label>
+                    <input type="range" id="heatwave-slider" min="0" max="8" step="1" value="0" style="width: 100%; accent-color: #f59e0b;">
+                </div>
+                <button id="dispatch-btn" class="primary-btn">
+                    <span class="btn-text">Start Dispatch Journey</span>
+                    <span class="btn-icon">▶</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Side: Interactive Leaflet Map Container -->
+        <div id="map-container" class="map-area">
+            <div id="map"></div>
+
+            <!-- In-Transit Floating Telemetry HUD (Over the Map Area) -->
+            <div id="dispatch-hud" class="hud-container" style="display: none;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                    <h3 style="margin: 0;">In-Transit Telemetry</h3>
+                    <button type="button" id="close-hud-btn" title="Dismiss HUD" style="background: none; border: none; font-size: 15px; color: var(--text-muted); cursor: pointer; padding: 2px 8px; border-radius: 4px; line-height: 1;">✕</button>
+                </div>
+                <div id="hud-route-name">Simulating: --</div>
+                <div class="hud-stats">
+                    <div class="hud-stat-box">
+                        <span class="hud-label">Segment Temp</span>
+                        <span class="hud-value" id="hud-temp">--°C</span>
+                    </div>
+                    <div class="hud-stat-box">
+                        <span class="hud-label">Live Quality</span>
+                        <span class="hud-value" id="hud-quality">--%</span>
+                    </div>
+                    <div class="hud-stat-box">
+                        <span class="hud-label">Progress</span>
+                        <span class="hud-value" id="hud-progress">0%</span>
+                    </div>
+                </div>
+                <div id="hud-status" style="margin-top:0.5rem; font-size:0.8rem; color:#15803d; display:none;">
+                    Produce Delivered at Hub — Arrival Quality Verified
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Leaflet JS & Application Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="js/config.js"></script>
+    <script src="js/weather.js"></script>
+    <script src="js/routing.js"></script>
+    <script src="js/thermalModel.js"></script>
+    <script src="js/voice.js"></script>
+    <script src="js/app.js"></script>
+
+    <!-- Voice toast element -->
+    <div id="voice-toast"><span class="toast-icon">🔊</span><span class="toast-text"></span></div>
+
+    <!-- Drawer toggle script -->
+    <script>
+        const toggleDrawerBtn = document.getElementById('toggle-methodology-btn');
+        const methodologyDrawer = document.getElementById('methodology-drawer');
+        const drawerArrow = document.getElementById('drawer-arrow');
+        if (toggleDrawerBtn && methodologyDrawer) {
+            toggleDrawerBtn.addEventListener('click', () => {
+                const isOpen = methodologyDrawer.classList.contains('open');
+                if (isOpen) {
+                    methodologyDrawer.classList.remove('open');
+                    drawerArrow.textContent = '↓';
+                } else {
+                    methodologyDrawer.classList.add('open');
+                    drawerArrow.textContent = '↑';
+                }
+            });
+        }
+
+        // --- Theme (Dark / Light) Mode Toggle ---
+        const themeToggleBtn = document.getElementById('theme-toggle-btn');
+        const themeIcon = document.getElementById('theme-icon');
+        const themeLabel = document.getElementById('theme-label');
+
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.body.setAttribute('data-theme', 'dark');
+                if (themeIcon) themeIcon.textContent = '☀️';
+                if (themeLabel) themeLabel.textContent = 'Light Mode';
+            } else {
+                document.body.removeAttribute('data-theme');
+                if (themeIcon) themeIcon.textContent = '🌙';
+                if (themeLabel) themeLabel.textContent = 'Dark Mode';
+            }
+            try { localStorage.setItem('coolroute_theme', theme); } catch (e) {}
+        }
+
+        const savedTheme = localStorage.getItem('coolroute_theme');
+        if (savedTheme) {
+            applyTheme(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            applyTheme('dark');
+        }
+
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => {
+                const currentTheme = document.body.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                applyTheme(newTheme);
+            });
+        }
+
+        // --- Voice Navigation Toggle ---
+        const voiceToggleBtn = document.getElementById('voice-toggle-btn');
+        const voiceIcon = document.getElementById('voice-icon');
+        const voiceLabel = document.getElementById('voice-label');
+
+        if (voiceToggleBtn) {
+            voiceToggleBtn.addEventListener('click', () => {
+                if (typeof VoiceNav === 'undefined') return;
+                const isCurrentlyEnabled = VoiceNav.isEnabled();
+                const willBeEnabled = !isCurrentlyEnabled;
+                VoiceNav.setEnabled(willBeEnabled);
+                if (willBeEnabled) {
+                    voiceToggleBtn.classList.add('voice-on');
+                    if (voiceIcon) voiceIcon.textContent = '🔊';
+                    if (voiceLabel) voiceLabel.textContent = 'Voice: ON';
+                    VoiceNav.speak('Voice navigation enabled.');
+                } else {
+                    voiceToggleBtn.classList.remove('voice-on');
+                    if (voiceIcon) voiceIcon.textContent = '🔇';
+                    if (voiceLabel) voiceLabel.textContent = 'Voice: OFF';
+                }
+            });
+        }
+
+        const closeHudBtn = document.getElementById('close-hud-btn');
+        const hudElem = document.getElementById('dispatch-hud');
+        if (closeHudBtn && hudElem) {
+            closeHudBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                hudElem.style.display = 'none';
+            });
+        }
+
+        const hudStatus = document.getElementById('hud-status');
+        if (hudStatus && hudElem) {
+            hudStatus.setAttribute('title', 'Click to dismiss HUD');
+            hudStatus.style.cursor = 'pointer';
+            hudStatus.addEventListener('click', (e) => {
+                e.stopPropagation();
+                hudElem.style.display = 'none';
+            });
+        }
+    </script>
+</body>
+</html>

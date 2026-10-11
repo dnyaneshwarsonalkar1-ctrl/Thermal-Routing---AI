@@ -1,0 +1,33 @@
+{
+  "name": "coolroute-thermal-routing",
+  "version": "1.0.0",
+  "description": "AI Thermal Logistics Control Center — Biophysical decay & weather-aware perishability routing (AI26AG02)",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "serve:frontend": "npx serve frontend -l 3000",
+    "test": "node skills/test-backend.js && node skills/test-frontend-integration.js && node skills/audit-two-page.js",
+    "test:backend": "node skills/test-backend.js",
+    "test:frontend": "node skills/test-frontend-integration.js",
+    "test:audit": "node skills/audit-two-page.js"
+  },
+  "keywords": [
+    "cold-chain",
+    "perishables",
+    "thermal-routing",
+    "biophysical-decay",
+    "logistics",
+    "leaflet",
+    "open-meteo",
+    "osrm",
+    "apmc-mandi"
+  ],
+  "author": "AI26AG02 Team",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^18.0.7",
+    "express": "^4.19.2"
+  }
+}
